@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantAlpha AI | Google Cloud Solution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #c2410c;
+            --accent: #047857;
+            --bg-light: #fef8f0;
+            --bg-white: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --google-blue: #4285F4;
+            --google-green: #0F9D58;
+            --google-yellow: #F4B400;
+            --google-red: #DB4437;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(254, 248, 240, 0.8) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(254, 248, 240, 0.6) 0%, transparent 20%);
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(194, 65, 12, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(4, 120, 87, 0.1) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .logo-google {
+            color: var(--google-blue);
+            font-weight: 500;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 5rem 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .badge i {
+            font-size: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .solution-card {
+            background: var(--bg-white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .card-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .google-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .service-tag {
+            background: var(--bg-light);
+            color: var(--google-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(66, 133, 244, 0.2);
+        }
+        
+        .architecture-section {
+            background: var(--bg-light);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+        
+        .architecture-diagram {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .layer {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .layer-title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #9a3412;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            border-color: white;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-light);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content {
+                padding: 3rem 0;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container">
+            <nav class="nav-bar">
+                <div class="logo">
+                    <i class="fas fa-chart-line" style="color: var(--secondary);"></i>
+                    <span>QuantAlpha<span style="color: var(--google-blue);">AI</span></span>
+                </div>
+                <div class="nav-links">
+                    <a href="#solution">Solution</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#benefits">Benefits</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+            
+            <div class="hero-content fade-in">
+                <div class="badge">
+                    <i class="fab fa-google"></i>
+                    Google Cloud Build Partner
+                </div>
+                
+                <h1 class="slide-up">Cloud-Powered Systematic Trading for Digital Assets</h1>
+                
+                <p class="hero-subtitle">
+                    Institutional-grade AI infrastructure built on Google Cloud, delivering systematic strategies for the $3.3T digital asset market
+                </p>
+                
+                <div class="cta-buttons">
+                    <a href="#architecture" class="btn btn-primary">
+                        <i class="fas fa-cloud"></i> View Cloud Architecture
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Request Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="solution" class="container">
+        <h2 style="text-align: center; margin-bottom: 1rem; color: var(--primary);">Google Cloud Solution</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            The QuantAlpha AI Platform leverages Google Cloud's AI/ML and data stack to power our quantitative trading pipeline
+        </p>
+        
+        <div class="solution-grid">
+            <div class="solution-card slide-up">
+                <div class="card-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="card-title">AI/ML Research & Training</h3>
+                <p class="card-description">
+                    Build, train, and deploy proprietary ML models for market prediction and NLP-based alpha extraction using Vertex AI
+                </p>
+                <div class="google-services">
+                    <span class="service-tag">Vertex AI</span>
+                    <span class="service-tag">BigQuery ML</span>
+                    <span class="service-tag">Cloud TPU</span>
+                </div>
+            </div>
+            
+            <div class="solution-card slide-up" style="animation-delay: 0.1s;">
+                <div class="card-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3 class="card-title">Data Analytics & Backtesting</h3>
+                <p class="card-description">
+                    Process and analyze 7+ years of multi-chain crypto data with petabyte-scale backtesting in BigQuery
+                </p>
+                <div class="google-services">
+                    <span class="service-tag">BigQuery</span>
+                    <span class="service-tag">Dataflow</span>
+                    <span class="service-tag">Dataproc</span>
+                </div>
+            </div>
+            
+            <div class="solution-card slide-up" style="animation-delay: 0.2s;">
+                <div class="card-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="card-title">Real-time Processing</h3>
+                <p class="card-description">
+                    Ingest and process global market data with Pub/Sub and Dataflow for low-latency signal generation
+                </p>
+                <div class="google-services">
+                    <span class="service-tag">Pub/Sub</span>
+                    <span class="service-tag">Dataflow</span>
+                    <span class="service-tag">Cloud Run</span>
+                </div>
+            </div>
+            
+            <div class="solution-card slide-up" style="animation-delay: 0.3s;">
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="card-title">Execution Infrastructure</h3>
+                <p class="card-description">
+                    High-availability cross-exchange execution engine running on Compute Engine with GKE orchestration
+                </p>
+                <div class="google-services">
+                    <span class="service-tag">Compute Engine</span>
+                    <span class="service-tag">GKE</span>
+                    <span class="service-tag">Cloud Load Balancing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem; color: var(--primary);">Cloud Architecture</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+                End-to-end Google Cloud integration for systematic trading
+            </p>
+            
+            <div class="architecture-diagram">
+                <div class="layer">
+                    <h3 class="layer-title"><i class="fas fa-layer-group"></i> Data Ingestion Layer</h3>
+                    <ul style="color: var(--text-light); padding-left: 1.2rem;">
+                        <li>Market data feeds via Pub/Sub</li>
+                        <li>On-chain data streaming</li>
+                        <li>News & social media ingestion</li>
+                    </ul>
+                    <div class="google-services" style="margin-top: 1rem;">
+                        <span class="service-tag">Pub/Sub</span>
+                        <span class="service-tag">Cloud Storage</span>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <h3 class="layer-title"><i class="fas fa-chart-bar"></i> Processing Layer</h3>
+                    <ul style="color: var(--text-light); padding-left: 1.2rem;">
+                        <li>Real-time feature computation</li>
+                        <li>ML inference pipelines</li>
+                        <li>Risk signal generation</li>
+                    </ul>
+                    <div class="google-services" style="margin-top: 1rem;">
+                        <span class="service-tag">Dataflow</span>
+                        <span class="service-tag">Vertex AI</span>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <h3 class="layer-title"><i class="fas fa-robot"></i> AI/ML Layer</h3>
+                    <ul style="color: var(--text-light); padding-left: 1.2rem;">
+                        <li>Model training & serving</li>
+                        <li>Backtesting at scale</li>
+                        <li>NLP for alpha extraction</li>
+                    </ul>
+                    <div class="google-services" style="margin-top: 1rem;">
+                        <span class="service-tag">Vertex AI</span>
+                        <span class="service-tag">BigQuery ML</span>
+                    </div>
+                </div>
+                
+                <div class="layer">
+                    <h3 class="layer-title"><i class="fas fa-exchange-alt"></i> Execution Layer</h3>
+                    <ul style="color: var(--text-light); padding-left: 1.2rem;">
+                        <li>Cross-venue order routing</li>
+                        <li>Real-time risk controls</li>
+                        <li>Portfolio management</li>
+                    </ul>
+                    <div class="google-services" style="margin-top: 1rem;">
+                        <span class="service-tag">Compute Engine</span>
+                        <span class="service-tag">Cloud Functions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="benefits" class="container">
+        <h2 style="text-align: center; margin-bottom: 1rem; color: var(--primary);">Business Benefits</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Why Google Cloud powers our institutional-grade trading infrastructure
+        </p>
+        
+        <div class="solution-grid">
+            <div class="solution-card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--google-blue), var(--google-red));">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="card-title">Scalability & Performance</h3>
+                <p class="card-description">
+                    Handle petabytes of market data and scale ML training on demand with Google's global infrastructure
+                </p>
+            </div>
+            
+            <div class="solution-card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--google-green), var(--google-blue));">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="card-title">Security & Compliance</h3>
+                <p class="card-description">
+                    Enterprise-grade security with built-in compliance for financial services and data protection
+                </p>
+            </div>
+            
+            <div class="solution-card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--google-yellow), var(--google-green));">
+                    <i class="fas fa-money-bill-trend-up"></i>
+                </div>
+                <h3 class="card-title">Cost Efficiency</h3>
+                <p class="card-description">
+                    Optimize costs with committed use discounts and auto-scaling based on market volatility patterns
+                </p>
+            </div>
+            
+            <div class="solution-card">
+                <div class="card-icon" style="background: linear-gradient(135deg, var(--google-red), var(--google-yellow));">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="card-title">Global Low-Latency</h3>
+                <p class="card-description">
+                    Deploy trading engines in regions closest to exchanges for sub-millisecond execution latency
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Deploy on Google Cloud?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                Contact us for a technical demo or architecture review
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="mailto:carlo@quantalphaai.xyz" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Email: carlo@quantalphaai.xyz
+                </a>
+                <a href="https://quantalphaai.xyz" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i> Visit Our Website
+                </a>
+            </div>
+            
+            <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--google-yellow);">$3.3T</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Digital Asset Market</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--google-green);">24/7</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Market Coverage</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--google-blue);">7+</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Years of Data</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--google-red);">AI</div>
+                    <div style="font-size: 0.9rem; opacity: 0.8;">Powered Strategies</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <i class="fas fa-chart-line" style="color: var(--secondary);"></i>
+                <span>QuantAlpha<span style="color: var(--google-blue);">AI</span></span>
+            </div>
+            <p style="margin-bottom: 1rem;">Google Cloud Build Partner Solution</p>
+            <p style="font-size: 0.9rem; opacity: 0.7;">
+                &copy; 2024 QuantAlpha AI. All rights reserved. | 
+                <a href="https://quantalphaai.xyz" style="color: var(--google-blue); text-decoration: none;">quantalphaai.xyz</a>
+            </p>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem;">
+                <a href="#" style="color: var(--text-light);"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: var(--text-light);"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: var(--text-light);"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: var(--text-light);"><i class="fab fa-google"></i></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Simple animations on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-up');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all solution cards
+            document.querySelectorAll('.solution-card').forEach(card => {
+                observer.observe(card);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Google Cloud color animation
+            const googleColors = [var('--google-blue'), var('--google-green'), var('--google-yellow'), var('--google-red')];
+            let colorIndex = 0;
+            
+            function rotateGoogleColors() {
+                const badge = document.querySelector('.badge');
+                if (badge) {
+                    badge.style.background = `linear-gradient(135deg, ${googleColors[colorIndex]}, ${googleColors[(colorIndex + 1) % googleColors.length]})`;
+                    colorIndex = (colorIndex + 1) % googleColors.length;
+                }
+            }
+            
+            // Change colors every 3 seconds
+            setInterval(rotateGoogleColors, 3000);
+        });
+        
+        // CSS variable helper
+        function var(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        }
+    </script>
+</body>
+</html>
